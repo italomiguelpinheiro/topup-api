@@ -3,6 +3,10 @@
 
 REST-API recharge simulator
 
+goose to run migrates 
+- install
+
+
 
 routes
 - getUserInfo
