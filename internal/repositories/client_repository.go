@@ -33,14 +33,14 @@ func (r *ClientRepository) GetClients() ([]models.Client, error) {
 			&clientObj.MSISDN,
 			&clientObj.Balance,
 			&clientObj.CreditLimit)
-	}
 
-	if err != nil {
-		fmt.Println(err)
-		return []models.Client{}, err
-	}
+		if err != nil {
+			fmt.Println(err)
+			return []models.Client{}, err
+		}
 
-	clientList = append(clientList, clientObj)
+		clientList = append(clientList, clientObj)
+	}
 
 	rows.Close()
 	return clientList, nil
