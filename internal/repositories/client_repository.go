@@ -45,3 +45,32 @@ func (r *ClientRepository) GetClients() ([]models.Client, error) {
 	rows.Close()
 	return clientList, nil
 }
+
+func (r *ClientRepository) GetClientById(client_id int) (*models.Client, error) {
+	query, err := r.connection.Prepare("SELECT * FROM clients WHERE id = $1")
+
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+
+	var client models.Client
+
+	err = query.QueryRow(client_id).Scan(
+		&client.ID,
+		&client.MSISDN,
+		&client.Balance,
+		&client.CreditLimit,
+	)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+
+		return nil, err
+	}
+
+	query.Close()
+	return &client, nil
+}

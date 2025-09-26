@@ -18,3 +18,13 @@ func NewClientUsercase(repo repositories.ClientRepository) ClientUsecase {
 func (u *ClientUsecase) GetClients() ([]models.Client, error) {
 	return u.repository.GetClients()
 }
+
+func (u *ClientUsecase) GetClientById(client_id int) (*models.Client, error) {
+	client, err := u.repository.GetClientById(client_id)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return client, nil
+}

@@ -36,6 +36,7 @@ func main() {
 
 	server.GET("/clients", ClientController.GetClients)
 	server.GET("/offers", OfferController.GetOffers)
+	server.GET("/client/:clientId", ClientController.GetClientById)
 
 	server.POST("/purchase", PurchaseController.CreateProduct)
 
