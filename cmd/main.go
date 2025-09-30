@@ -34,6 +34,13 @@ func main() {
 	OfferUsecase := usecases.NewOfferUsecase(OfferRepository)
 	OfferController := controllers.NewOfferController(OfferUsecase)
 
+	CreditCardRepository := repositories.NewCreditCardRepository(dbConnection)
+	CreditCardUsecase := usecases.NewCreditCardUsecase(CreditCardRepository)
+	CreditCardController := controllers.NewCreditCardController(CreditCardUsecase)
+
+	// rota para pegar cartões do cliente
+	server.GET("/client/:clientId/cards", CreditCardController.GetCreditCardsByClientId)
+
 	server.GET("/clients", ClientController.GetClients)
 	server.GET("/offers", OfferController.GetOffers)
 	server.GET("/client/:clientId", ClientController.GetClientById)
